@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Estudo - Operações com Números Inteiros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-size: 1.05em;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.6em;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '📚';
+            font-size: 1.3em;
+        }
+
+        .rule-box {
+            background: #f0f4ff;
+            border-left: 5px solid #667eea;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .example-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-title::before {
+            content: '✏️';
+        }
+
+        .example-item {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .example-item::before {
+            content: '→';
+            position: absolute;
+            left: 5px;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .formula {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05em;
+            color: #2e7d32;
+        }
+
+        .key-concept {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px dashed #ff9800;
+        }
+
+        .key-concept-title {
+            font-weight: 700;
+            color: #ff9800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .key-concept-title::before {
+            content: '⭐';
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .property-card {
+            background: #eceff1;
+            border-radius: 8px;
+            padding: 15px;
+            border: 2px solid #90caf9;
+        }
+
+        .property-card-title {
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+
+        .property-card p {
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .operation-section {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .subsection-title {
+            font-size: 1.2em;
+            color: #764ba2;
+            margin: 20px 0 15px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note {
+            background: #ffe0b2;
+            border-left: 5px solid #ff6f00;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-size: 0.98em;
+        }
+
+        .note::before {
+            content: '⚠️ ';
+            font-weight: bold;
+        }
+
+        .tip {
+            background: #c8e6c9;
+            border-left: 5px solid #388e3c;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-size: 0.98em;
+        }
+
+        .tip::before {
+            content: '💡 ';
+            font-weight: bold;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .order-list {
+            background: #fff3e0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border: 2px solid #ff9800;
+        }
+
+        .order-list-item {
+            margin: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .order-list-item::before {
+            content: attr(data-number);
+            position: absolute;
+            left: 0;
+            background: #ff9800;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .header-title {
+                font-size: 1.8em;
+            }
+
+            .header-subtitle {
+                font-size: 1.1em;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-title">📐 Guia de Estudo - Período 1</div>
+            <div class="header-subtitle">Operações com Números Inteiros</div>
+        </header>
+
+        <div class="content">
+            <div class="intro-box">
+                <strong>Bem-vindo, Murilo!</strong> Este guia foi criado para você dominar as operações com números inteiros. Dedique os próximos 30 minutos para estudar este material e após terminar, faça o quiz correspondente. Você vai arrasar! 🚀
+            </div>
+
+            <!-- ADIÇÃO -->
+            <div class="section">
+                <div class="section-title">1. Adição com Números Inteiros</div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 Quando os sinais são iguais:</div>
+                    <div class="rule-box">
+                        Soma os módulos (valores absolutos) dos números e mantém o sinal.
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Exemplos:</div>
+                        <div class="example-item">(+4) + (+5) = +9</div>
+                        <div class="example-item">(–2) + (–3) = –5</div>
+                        <div class="example-item">(+10) + (+8) = +18</div>
+                        <div class="example-item">(–7) + (–6) = –13</div>
+                    </div>
+
+                    <div class="key-concept">
+                        <div class="key-concept-title">Entendendo:</div>
+                        Se você deve R$5 e depois deve mais R$3, no total deve R$8. (-5) + (-3) = -8
+                    </div>
+                </div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 Quando os sinais são diferentes:</div>
+                    <div class="rule-box">
+                        Subtrai os módulos (maior módulo menos o menor) e mantém o sinal do número com maior módulo.
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Exemplos:</div>
+                        <div class="example-item">(+25) + (–5) = +20 (|25| > |5|, então sinal positivo)</div>
+                        <div class="example-item">(–36) + (+10) = –26 (|36| > |10|, então sinal negativo)</div>
+                        <div class="example-item">(+8) + (–12) = –4 (|12| > |8|, então sinal negativo)</div>
+                        <div class="example-item">(–15) + (+40) = +25 (|40| > |15|, então sinal positivo)</div>
+                    </div>
+
+                    <div class="tip">
+                        Para visualizar melhor: imagine uma reta numérica. Números positivos vão para a direita, negativos para a esquerda. Você começa do zero e segue na direção indicada.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROPRIEDADES DA ADIÇÃO -->
+            <div class="section">
+                <div class="section-title">2. Propriedades da Adição</div>
+
+                <div class="properties-grid">
+                    <div class="property-card">
+                        <div class="property-card-title">Comutativa</div>
+                        <p>Você pode trocar a ordem dos números que o resultado não muda.</p>
+                        <div class="formula">a + b = b + a</div>
+                        <p><strong>Ex:</strong> (+3) + (–2) = (–2) + (+3) = +1</p>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="property-card-title">Associativa</div>
+                        <p>Você pode mudar a ordem de agrupamento sem alterar o resultado.</p>
+                        <div class="formula">(a + b) + c = a + (b + c)</div>
+                        <p><strong>Ex:</strong> [(+2) + (–3)] + (+5) = (+2) + [(–3) + (+5)]</p>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="property-card-title">Elemento Neutro</div>
+                        <p>O zero é o elemento neutro da adição. Qualquer número somado com zero é igual a si mesmo.</p>
+                        <div class="formula">a + 0 = a</div>
+                        <p><strong>Ex:</strong> (–7) + 0 = –7</p>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="property-card-title">Elemento Oposto</div>
+                        <p>Todo número inteiro possui um oposto (inverso aditivo). Sua soma resulta em zero.</p>
+                        <div class="formula">a + (–a) = 0</div>
+                        <p><strong>Ex:</strong> (+5) + (–5) = 0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTRAÇÃO -->
+            <div class="section">
+                <div class="section-title">3. Subtração com Números Inteiros</div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">Conceito Fundamental:</div>
+                    Subtrair é o mesmo que somar o oposto!
+                </div>
+
+                <div class="operation-section">
+                    <div class="rule-box">
+                        <strong>a – b = a + (–b)</strong>
+                        <br><br>
+                        Para subtrair, transforme a subtração em uma adição do oposto do segundo número.
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Exemplos Passo a Passo:</div>
+                        <div class="example-item"><strong>(+31) – (+26)</strong> = (+31) + (–26) = +5</div>
+                        <div class="example-item"><strong>(–2) – (–6)</strong> = (–2) + (+6) = +4</div>
+                        <div class="example-item"><strong>(+8) – (–6)</strong> = (+8) + (+6) = +14</div>
+                        <div class="example-item"><strong>(–10) – (+3)</strong> = (–10) + (–3) = –13</div>
+                        <div class="example-item"><strong>(+15) – (–8)</strong> = (+15) + (+8) = +23</div>
+                    </div>
+
+                    <div class="note">
+                        Observe o padrão: quando você subtrai um número negativo, o sinal dele muda para positivo! Isso é porque o oposto de um número negativo é positivo.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MULTIPLICAÇÃO -->
+            <div class="section">
+                <div class="section-title">4. Multiplicação com Números Inteiros</div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 Regra dos Sinais na Multiplicação:</div>
+
+                    <div class="key-concept">
+                        <div class="key-concept-title">Lembre-se:</div>
+                        <strong>Sinais iguais → resultado POSITIVO (+)</strong>
+                        <br>
+                        <strong>Sinais diferentes → resultado NEGATIVO (–)</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Exemplos:</div>
+                        <div class="example-item"><strong>(+3) · (+2) = +6</strong> (positivo com positivo = positivo)</div>
+                        <div class="example-item"><strong>(–3) · (–2) = +6</strong> (negativo com negativo = positivo)</div>
+                        <div class="example-item"><strong>(+3) · (–2) = –6</strong> (positivo com negativo = negativo)</div>
+                        <div class="example-item"><strong>(–3) · (+2) = –6</strong> (negativo com positivo = negativo)</div>
+                    </div>
+                </div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 Propriedades da Multiplicação:</div>
+
+                    <div class="properties-grid">
+                        <div class="property-card">
+                            <div class="property-card-title">Comutativa</div>
+                            <div class="formula">a · b = b · a</div>
+                            <p><strong>Ex:</strong> (–3) · (+2) = (+2) · (–3) = –6</p>
+                        </div>
+
+                        <div class="property-card">
+                            <div class="property-card-title">Associativa</div>
+                            <div class="formula">(a · b) · c = a · (b · c)</div>
+                            <p><strong>Ex:</strong> [(–2) · (+3)] · (+4) = (–2) · [(+3) · (+4)]</p>
+                        </div>
+
+                        <div class="property-card">
+                            <div class="property-card-title">Elemento Neutro</div>
+                            <div class="formula">a · 1 = a</div>
+                            <p><strong>Ex:</strong> (–5) · 1 = –5</p>
+                        </div>
+
+                        <div class="property-card">
+                            <div class="property-card-title">Elemento Nulo</div>
+                            <div class="formula">a · 0 = 0</div>
+                            <p><strong>Ex:</strong> (+8) · 0 = 0</p>
+                        </div>
+
+                        <div class="property-card">
+                            <div class="property-card-title">Distributiva</div>
+                            <div class="formula">a · (b + c) = a·b + a·c</div>
+                            <p><strong>Ex:</strong> (–2) · [(+3) + (–4)] = (–2)·(+3) + (–2)·(–4) = –6 + 8 = 2</p>
+                        </div>
+
+                        <div class="property-card">
+                            <div class="property-card-title">Multiplicação de 3 Números</div>
+                            <p>Se houver um número par de fatores negativos, o resultado é positivo. Se ímpar, é negativo.</p>
+                            <p><strong>Ex:</strong> (–2) · (–3) · (+4) = +24 (2 negativos = par)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVISÃO -->
+            <div class="section">
+                <div class="section-title">5. Divisão com Números Inteiros</div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 Regra dos Sinais na Divisão:</div>
+
+                    <div class="key-concept">
+                        <div class="key-concept-title">A regra é a mesma da multiplicação!</div>
+                        <strong>Sinais iguais → quociente POSITIVO (+)</strong>
+                        <br>
+                        <strong>Sinais diferentes → quociente NEGATIVO (–)</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Exemplos:</div>
+                        <div class="example-item"><strong>(–42) ÷ (–3) = +14</strong> (sinais iguais = positivo)</div>
+                        <div class="example-item"><strong>(+450) ÷ (–30) = –15</strong> (sinais diferentes = negativo)</div>
+                        <div class="example-item"><strong>(+64) ÷ (+8) = +8</strong> (sinais iguais = positivo)</div>
+                        <div class="example-item"><strong>(–100) ÷ (+5) = –20</strong> (sinais diferentes = negativo)</div>
+                    </div>
+
+                    <div class="note">
+                        A divisão é a operação inversa da multiplicação. Se você tem dúvida em uma divisão, pode verificar multiplicando o resultado pelo divisor!
+                    </div>
+                </div>
+            </div>
+
+            <!-- POTENCIAÇÃO -->
+            <div class="section">
+                <div class="section-title">6. Potenciação com Números Inteiros</div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 O que é uma potência?</div>
+
+                    <div class="formula">aⁿ = a · a · a · ... · a (n vezes)</div>
+
+                    <p style="margin: 15px 0; padding: 10px; background: #f0f4ff; border-radius: 6px;">
+                        Onde <strong>a</strong> é a base (número que se repete) e <strong>n</strong> é o expoente (quantas vezes se repete).
+                    </p>
+
+                    <div class="subsection-title">🔹 Expoente Par vs Expoente Ímpar:</div>
+
+                    <div class="properties-grid">
+                        <div class="property-card">
+                            <div class="property-card-title">Expoente PAR</div>
+                            <p>Sempre resulta em número POSITIVO, independente do sinal da base!</p>
+                            <p><strong>Ex:</strong> (–3)⁴ = (–3)·(–3)·(–3)·(–3) = <strong>+81</strong></p>
+                            <p><strong>Ex:</strong> (–2)² = (–2)·(–2) = <strong>+4</strong></p>
+                        </div>
+
+                        <div class="property-card">
+                            <div class="property-card-title">Expoente ÍMPAR</div>
+                            <p>O resultado tem o mesmo sinal da base!</p>
+                            <p><strong>Ex:</strong> (–3)⁵ = (–3)·(–3)·(–3)·(–3)·(–3) = <strong>–243</strong></p>
+                            <p><strong>Ex:</strong> (+2)³ = (+2)·(+2)·(+2) = <strong>+8</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="subsection-title">🔹 Propriedades da Potenciação:</div>
+
+                    <div class="rule-box" style="margin-top: 15px;">
+                        <strong>1. Multiplicação de Potências com Mesma Base:</strong>
+                        <div class="formula">aᵐ · aⁿ = aᵐ⁺ⁿ</div>
+                        <p><strong>Ex:</strong> (–2)³ · (–2)² = (–2)⁵ = –32</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>2. Divisão de Potências com Mesma Base:</strong>
+                        <div class="formula">aᵐ ÷ aⁿ = aᵐ⁻ⁿ</div>
+                        <p><strong>Ex:</strong> (+3)⁵ ÷ (+3)² = (+3)³ = +27</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>3. Potência de Potência:</strong>
+                        <div class="formula">(aᵐ)ⁿ = aᵐ·ⁿ</div>
+                        <p><strong>Ex:</strong> [(–2)²]³ = (–2)⁶ = +64</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>4. Expoente Zero:</strong>
+                        <div class="formula">a⁰ = 1 (para qualquer a ≠ 0)</div>
+                        <p><strong>Ex:</strong> (–5)⁰ = 1, (+100)⁰ = 1</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>5. Expoente Um:</strong>
+                        <div class="formula">a¹ = a</div>
+                        <p><strong>Ex:</strong> (–8)¹ = –8, (+12)¹ = +12</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RADICIAÇÃO -->
+            <div class="section">
+                <div class="section-title">7. Radiciação com Números Inteiros</div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 O que é uma raiz?</div>
+
+                    <div class="formula">ⁿ√a (raiz enésima de a)</div>
+
+                    <p style="margin: 15px 0; padding: 10px; background: #f0f4ff; border-radius: 6px;">
+                        A raiz é a operação inversa da potenciação. Se 2³ = 8, então ³√8 = 2
+                    </p>
+
+                    <div class="subsection-title">🔹 Raiz Quadrada de Negativos:</div>
+
+                    <div class="key-concept">
+                        <div class="key-concept-title">Importante!</div>
+                        <strong>Raiz quadrada de número negativo NÃO existe em ℤ</strong> (no conjunto dos números inteiros)
+                        <br><br>
+                        √(–4) não existe em ℤ porque nenhum número inteiro elevado ao quadrado resulta em um número negativo.
+                    </div>
+
+                    <div class="subsection-title">🔹 Raiz Cúbica de Negativos:</div>
+
+                    <div class="rule-box">
+                        <strong>Raiz cúbica de número negativo EXISTE!</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Exemplos:</div>
+                        <div class="example-item"><strong>³√(–27) = –3</strong> porque (–3)³ = –27</div>
+                        <div class="example-item"><strong>³√(–8) = –2</strong> porque (–2)³ = –8</div>
+                        <div class="example-item"><strong>³√(–125) = –5</strong> porque (–5)³ = –125</div>
+                    </div>
+
+                    <div class="tip">
+                        Resumindo: raízes de índice ÍMPAR (como raiz cúbica) podem ter resultado negativo. Raízes de índice PAR (como raiz quadrada) não podem ter números negativos dentro delas.
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPRESSÕES NUMÉRICAS -->
+            <div class="section">
+                <div class="section-title">8. Expressões Numéricas</div>
+
+                <div class="operation-section">
+                    <div class="subsection-title">🔹 Ordem de Operações (Prioridades):</div>
+
+                    <div class="order-list">
+                        <div class="order-list-item" data-number="1">
+                            <strong>Potenciação e Radiciação</strong> (do maior para o menor índice/expoente)
+                        </div>
+                        <div class="order-list-item" data-number="2">
+                            <strong>Multiplicação e Divisão</strong> (da esquerda para a direita)
+                        </div>
+                        <div class="order-list-item" data-number="3">
+                            <strong>Adição e Subtração</strong> (da esquerda para a direita)
+                        </div>
+                    </div>
+
+                    <div class="key-concept">
+                        <div class="key-concept-title">Símbolos de Agrupamento:</div>
+                        <strong>Parênteses ( )</strong> → <strong>Colchetes [ ]</strong> → <strong>Chaves { }</strong>
+                        <br><br>
+                        Resolva sempre o que está dentro desses símbolos, começando pelos parênteses!
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Exemplo Completo:</div>
+                        <div style="background: white; border: 2px solid #ff9800; border-radius: 6px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.95em;">
+                            <p><strong>–2 + 3 · (–4)² ÷ 2 – 5</strong></p>
+                            <p>Passo 1: Potenciação → (–4)² = +16</p>
+                            <p>–2 + 3 · 16 ÷ 2 – 5</p>
+                            <p>Passo 2: Multiplicação e divisão (esquerda para direita)</p>
+                            <p>3 · 16 = 48 → 48 ÷ 2 = 24</p>
+                            <p>–2 + 24 – 5</p>
+                            <p>Passo 3: Adição e subtração (esquerda para direita)</p>
+                            <p>–2 + 24 = 22 → 22 – 5 = <strong>+17</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Outro Exemplo com Parênteses:</div>
+                        <div style="background: white; border: 2px solid #ff9800; border-radius: 6px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.95em;">
+                            <p><strong>[(+2) – (–3)] · (–4) + 5</strong></p>
+                            <p>Passo 1: Parênteses</p>
+                            <p>(+2) – (–3) = (+2) + (+3) = +5</p>
+                            <p>[+5] · (–4) + 5</p>
+                            <p>Passo 2: Multiplicação</p>
+                            <p>+5 · (–4) = –20</p>
+                            <p>–20 + 5 = <strong>–15</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESUMO FINAL -->
+            <div class="section" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 10px; padding: 25px; margin-top: 30px;">
+                <div class="section-title" style="border-color: #667eea;">Resumo das Regras Principais</div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                    <div style="background: white; padding: 12px; border-radius: 6px; border-left: 5px solid #4caf50;">
+                        <strong style="color: #2e7d32;">✓ Adição:</strong> Sinais iguais = soma módulos
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border-left: 5px solid #4caf50;">
+                        <strong style="color: #2e7d32;">✓ Subtração:</strong> a – b = a + (–b)
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border-left: 5px solid #1976d2;">
+                        <strong style="color: #0d47a1;">✓ Multiplicação:</strong> Sinais iguais = positivo
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border-left: 5px solid #1976d2;">
+                        <strong style="color: #0d47a1;">✓ Divisão:</strong> Mesma regra que multiplicação
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border-left: 5px solid #f57c00;">
+                        <strong style="color: #e65100;">✓ Potenciação:</strong> Par = positivo; Ímpar = sinal da base
+                    </div>
+                    <div style="background: white; padding: 12px; border-radius: 6px; border-left: 5px solid #c2185b;">
+                        <strong style="color: #880e4f;">✓ Ordem:</strong> Potência → Mult/Div → Ad/Sub
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            Bons estudos, Murilo! 💪 Agora vá para o Quiz - você vai arrasar!
+        </footer>
+    </div>
+</body>
+</html>

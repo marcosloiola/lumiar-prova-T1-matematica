@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Estudo - Período 3: Operações com Números Racionais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.6em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .content-box {
+            background: #f8f9ff;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .content-box h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .content-box p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .content-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .example {
+            background: #fff9e6;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .example strong {
+            display: block;
+            color: #ff9800;
+            font-style: normal;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .example code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+
+        .key-point {
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .key-point strong {
+            color: #2e7d32;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .key-point p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .formula {
+            background: #fff3e0;
+            padding: 15px;
+            border-left: 4px solid #ff6f00;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05em;
+            color: #333;
+        }
+
+        .tip {
+            background: #f3e5f5;
+            padding: 15px;
+            border-left: 4px solid #9c27b0;
+            border-radius: 6px;
+            margin: 15px 0;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .tip strong {
+            color: #7b1fa2;
+            font-weight: 600;
+        }
+
+        .step-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .step-list li {
+            padding: 12px 0;
+            padding-left: 40px;
+            position: relative;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .step-list li:before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .signal-rule {
+            background: #ffe0e6;
+            padding: 15px;
+            border-left: 4px solid #e91e63;
+            border-radius: 6px;
+            margin: 15px 0;
+            color: #555;
+        }
+
+        .signal-rule strong {
+            color: #c2185b;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .signal-rule table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .signal-rule table td {
+            padding: 8px;
+            border: 1px solid #f0cad4;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .signal-rule table td:first-child {
+            text-align: left;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 2px solid #e0e0e0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .footer-emoji {
+            font-size: 1.5em;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1.1em;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            .step-list li {
+                padding-left: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔢 Guia de Estudo - Período 3</h1>
+            <p>Operações com Números Racionais</p>
+        </div>
+
+        <div class="content">
+            <!-- Seção 1: Adição de Frações com Denominadores Iguais -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">1</div>
+                    Adição de Frações com Denominadores Iguais
+                </div>
+
+                <div class="content-box">
+                    <h3>Regra Principal</h3>
+                    <p>Quando duas ou mais frações têm o mesmo denominador, você pode somá-las facilmente:</p>
+                </div>
+
+                <div class="formula">
+                    a/c + b/c = (a + b)/c
+                </div>
+
+                <div class="example">
+                    <strong>Exemplo:</strong>
+                    <code>2/7 + 3/7 = (2 + 3)/7 = 5/7</code>
+                </div>
+
+                <div class="key-point">
+                    <strong>Regra de Sinais para Frações</strong>
+                    <p><strong>Numerador negativo:</strong> A fração fica negativa (ex: -2/5)</p>
+                    <p><strong>Denominador negativo:</strong> A fração também fica negativa (ex: 2/-5 = -2/5)</p>
+                    <p><strong>Ambos negativos:</strong> A fração fica positiva (ex: -2/-5 = 2/5)</p>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 Dica:</strong> Pense no numerador como a quantidade e no denominador como o tipo de pedaço. Se você tem 2 sétimos e adiciona 3 sétimos, fica fácil: 5 sétimos!
+                </div>
+            </div>
+
+            <!-- Seção 2: Adição de Frações com Denominadores Diferentes -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">2</div>
+                    Adição de Frações com Denominadores Diferentes
+                </div>
+
+                <div class="content-box">
+                    <h3>Processo em 3 Passos</h3>
+                </div>
+
+                <ol class="step-list">
+                    <li data-step="1º"><strong>Encontrar o MMC (Mínimo Múltiplo Comum)</strong> dos denominadores para obter um denominador comum</li>
+                    <li data-step="2º"><strong>Converter as frações</strong> para frações equivalentes com o denominador comum, multiplicando numerador e denominador pelo mesmo número</li>
+                    <li data-step="3º"><strong>Somar os numeradores</strong> mantendo o denominador comum e simplificar se possível</li>
+                </ol>
+
+                <div class="example">
+                    <strong>Exemplo Completo:</strong>
+                    <p><code>1/3 + 2/5</code></p>
+                    <p><strong>Passo 1:</strong> MMC(3, 5) = 15</p>
+                    <p><strong>Passo 2:</strong> 1/3 = 5/15 e 2/5 = 6/15</p>
+                    <p><strong>Passo 3:</strong> 5/15 + 6/15 = 11/15</p>
+                    <p><strong>Resultado:</strong> 11/15 (já está simplificada)</p>
+                </div>
+
+                <div class="key-point">
+                    <strong>Simplificação</strong>
+                    <p>Verifique se o numerador e denominador têm um divisor comum. Se tiverem, divida ambos para obter a fração na forma mais simples.</p>
+                </div>
+            </div>
+
+            <!-- Seção 3: Adição de Números Decimais -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">3</div>
+                    Adição de Números Decimais Exatos
+                </div>
+
+                <div class="content-box">
+                    <h3>Processo</h3>
+                    <p>Para somar números decimais, você precisa:</p>
+                </div>
+
+                <ol class="step-list">
+                    <li data-step="1º">Igualar a quantidade de casas decimais (completar com zeros)</li>
+                    <li data-step="2º">Alinhar as vírgulas verticalmente</li>
+                    <li data-step="3º">Somar normalmente, respeitando cada coluna</li>
+                </ol>
+
+                <div class="example">
+                    <strong>Exemplo:</strong>
+                    <p>7,45 + 4,2 + 3,007 = ?</p>
+                    <p>Igualando casas decimais:<br>
+                    7,450 + 4,200 + 3,007<br>
+                    <strong>Resultado:</strong> 14,657</p>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 Alternativa:</strong> Você também pode converter decimais em frações e usar o método de adição de frações!<br>
+                    Ex: 0,5 = 5/10 = 1/2
+                </div>
+            </div>
+
+            <!-- Seção 4: Subtração de Frações com Denominadores Iguais -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">4</div>
+                    Subtração de Frações com Denominadores Iguais
+                </div>
+
+                <div class="content-box">
+                    <h3>Regra Principal</h3>
+                    <p>Assim como na adição, mantemos o denominador e subtraímos os numeradores:</p>
+                </div>
+
+                <div class="formula">
+                    a/c - b/c = (a - b)/c
+                </div>
+
+                <div class="example">
+                    <strong>Exemplo:</strong>
+                    <code>5/8 - 3/8 = (5 - 3)/8 = 2/8 = 1/4</code><br><br>
+                    Note que simplificamos: 2/8 ÷ 2 = 1/4
+                </div>
+
+                <div class="key-point">
+                    <strong>Atenção:</strong> Sempre procure simplificar o resultado final!
+                </div>
+            </div>
+
+            <!-- Seção 5: Subtração de Frações com Denominadores Diferentes -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">5</div>
+                    Subtração de Frações com Denominadores Diferentes
+                </div>
+
+                <div class="content-box">
+                    <h3>Processo Idêntico à Adição</h3>
+                    <p>Use o mesmo processo da adição, mas subtraia em vez de somar:</p>
+                </div>
+
+                <ol class="step-list">
+                    <li data-step="1º">Encontre o MMC dos denominadores</li>
+                    <li data-step="2º">Converta para frações equivalentes</li>
+                    <li data-step="3º">Subtraia os numeradores mantendo o denominador</li>
+                    <li data-step="4º">Simplifique o resultado</li>
+                </ol>
+
+                <div class="example">
+                    <strong>Exemplo Completo:</strong>
+                    <p><code>5/7 - 1/6</code></p>
+                    <p><strong>MMC(7, 6) = 42</strong></p>
+                    <p>5/7 = 30/42 e 1/6 = 7/42</p>
+                    <p>30/42 - 7/42 = 23/42</p>
+                    <p><strong>Resultado:</strong> 23/42 (não pode simplificar)</p>
+                </div>
+            </div>
+
+            <!-- Seção 6: Subtração de Números Decimais -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">6</div>
+                    Subtração de Números Decimais Exatos
+                </div>
+
+                <div class="content-box">
+                    <h3>Mesmo Processo da Adição</h3>
+                    <p>Para subtrair números decimais, iguale as casas decimais e subtraia normalmente:</p>
+                </div>
+
+                <div class="example">
+                    <strong>Exemplo:</strong>
+                    <p>12,57 - 4,8 = ?</p>
+                    <p>Igualando: 12,57 - 4,80<br>
+                    <strong>Resultado:</strong> 7,77</p>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 Dica:</strong> Sempre alinhe as vírgulas! Isso evita erros muito comuns.
+                </div>
+            </div>
+
+            <!-- Seção 7: Multiplicação de Frações -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">7</div>
+                    Multiplicação de Frações
+                </div>
+
+                <div class="content-box">
+                    <h3>Regra Principal</h3>
+                    <p>Para multiplicar frações, multiplicamos numerador por numerador e denominador por denominador:</p>
+                </div>
+
+                <div class="formula">
+                    (a/b) × (c/d) = (a × c) / (b × d)
+                </div>
+
+                <div class="example">
+                    <strong>Exemplo:</strong>
+                    <code>(2/3) × (4/5) = (2 × 4) / (3 × 5) = 8/15</code>
+                </div>
+
+                <div class="key-point">
+                    <strong>Regra de Sinais</strong>
+                    <p>Positivo × Positivo = Positivo<br>
+                    Negativo × Negativo = Positivo<br>
+                    Positivo × Negativo = Negativo<br>
+                    Negativo × Positivo = Negativo</p>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 Simplificação Prévia:</strong> Você pode simplificar antes de multiplicar! Se um numerador e um denominador compartilham um fator comum, divida ambos por ele para facilitar as contas.
+                </div>
+            </div>
+
+            <!-- Seção 8: Divisão de Frações -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">8</div>
+                    Divisão de Frações
+                </div>
+
+                <div class="content-box">
+                    <h3>Regra Principal: Multiplique pela Fração Inversa</h3>
+                    <p>Para dividir frações, você multiplica a primeira fração pela fração inversa (ou recíproca) da segunda:</p>
+                </div>
+
+                <div class="formula">
+                    (a/b) ÷ (c/d) = (a/b) × (d/c) = (a × d) / (b × c)
+                </div>
+
+                <div class="example">
+                    <strong>Exemplo Completo:</strong>
+                    <p><code>(2/3) ÷ (4/5)</code></p>
+                    <p><strong>Passo 1:</strong> Inverta a segunda fração: 4/5 ⟶ 5/4</p>
+                    <p><strong>Passo 2:</strong> Multiplique: (2/3) × (5/4) = 10/12</p>
+                    <p><strong>Passo 3:</strong> Simplifique: 10/12 = 5/6</p>
+                    <p><strong>Resultado:</strong> 5/6</p>
+                </div>
+
+                <div class="key-point">
+                    <strong>Fração Inversa (Recíproca)</strong>
+                    <p>A fração inversa de a/b é b/a. Você simplesmente inverte numerador e denominador!</p>
+                </div>
+            </div>
+
+            <!-- Seção 9: Potenciação de Frações -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">9</div>
+                    Potenciação de Frações
+                </div>
+
+                <div class="content-box">
+                    <h3>Regra Principal</h3>
+                    <p>Para elevar uma fração a uma potência, eleve tanto o numerador quanto o denominador àquele expoente:</p>
+                </div>
+
+                <div class="formula">
+                    (a/b)ⁿ = aⁿ / bⁿ
+                </div>
+
+                <div class="example">
+                    <strong>Exemplos:</strong>
+                    <p><code>(2/3)² = 2² / 3² = 4/9</code></p>
+                    <p><code>(1/2)³ = 1³ / 2³ = 1/8</code></p>
+                    <p><code>(3/4)² = 3² / 4² = 9/16</code></p>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 Ordem de Operações:</strong> Lembre-se que potenciação tem prioridade sobre multiplicação e divisão! Sempre faça a potência primeiro.
+                </div>
+            </div>
+
+            <!-- Seção 10: Expressões Numéricas -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-number">10</div>
+                    Expressões Numéricas com Racionais
+                </div>
+
+                <div class="content-box">
+                    <h3>Ordem de Operações: PEMDAS/BODMAS</h3>
+                    <p>Ao resolver expressões numéricas com números racionais, siga esta ordem:</p>
+                </div>
+
+                <ol class="step-list">
+                    <li data-step="1º"><strong>Parênteses</strong> - Resolva operações dentro de parênteses primeiro</li>
+                    <li data-step="2º"><strong>Potenciação</strong> - Calcule todas as potências</li>
+                    <li data-step="3º"><strong>Multiplicação e Divisão</strong> - Faça da esquerda para a direita, na ordem que aparecerem</li>
+                    <li data-step="4º"><strong>Adição e Subtração</strong> - Faça da esquerda para a direita, na ordem que aparecerem</li>
+                </ol>
+
+                <div class="example">
+                    <strong>Exemplo:</strong>
+                    <p><code>(1/2 + 1/4) × 2 - 1/3</code></p>
+                    <p><strong>Passo 1:</strong> Parênteses: 1/2 + 1/4 = 2/4 + 1/4 = 3/4</p>
+                    <p><strong>Passo 2:</strong> Multiplicação: 3/4 × 2 = 6/4 = 3/2</p>
+                    <p><strong>Passo 3:</strong> Subtração: 3/2 - 1/3 = 9/6 - 2/6 = 7/6</p>
+                    <p><strong>Resultado:</strong> 7/6</p>
+                </div>
+
+                <div class="key-point">
+                    <strong>Dica Importante</strong>
+                    <p>Converter todos os números para o mesmo formato (todas frações ou todos decimais) muitas vezes facilita a resolução. Escolha o formato que te deixa mais confortável!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="footer-emoji">✏️</span>
+            Bons estudos, Murilo!
+            <span class="footer-emoji">💪</span>
+        </div>
+    </div>
+</body>
+</html>

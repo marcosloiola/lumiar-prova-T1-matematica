@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Período 1: Operações com Números Inteiros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .progress-container {
+            background: #f5f5f5;
+            padding: 20px 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .score-summary {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9em;
+        }
+
+        .score-item {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            background: white;
+            border-left: 4px solid #667eea;
+        }
+
+        .score-item.correct {
+            border-left-color: #4caf50;
+        }
+
+        .score-item.incorrect {
+            border-left-color: #f44336;
+        }
+
+        .content {
+            padding: 30px;
+            min-height: 400px;
+        }
+
+        .question-container {
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-header {
+            margin-bottom: 20px;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .difficulty-badge.easy {
+            background: #4caf50;
+        }
+
+        .difficulty-badge.medium {
+            background: #ff9800;
+        }
+
+        .difficulty-badge.hard {
+            background: #f44336;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            position: relative;
+            padding-left: 45px;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"] {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            margin: 0;
+        }
+
+        .option label {
+            cursor: pointer;
+            display: block;
+            user-select: none;
+        }
+
+        .option.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            border-left-color: #f44336;
+            color: #c62828;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .feedback-content {
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-width: 150px;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-restart {
+            background: #f44336;
+            color: white;
+            min-width: 150px;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(244, 67, 54, 0.4);
+        }
+
+        .results-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .results-screen.show {
+            display: block;
+        }
+
+        .results-header {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            padding: 20px;
+            border-radius: 10px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+        }
+
+        .stat-card.correct {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .stat-card.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .stat-card.percentage {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .results-message {
+            font-size: 1.3em;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .results-message.excellent {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .results-message.good {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .results-message.fair {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .question-text {
+                font-size: 1.1em;
+            }
+
+            .results-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 Quiz - Período 1: Operações com Números Inteiros</h1>
+            <p>Responda todas as 24 questões para testar seus conhecimentos</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-info">
+                <span>Progresso: <strong id="current-question">1</strong> de <strong>24</strong></span>
+                <span id="current-difficulty">Fácil</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="score-summary">
+                <div class="score-item correct">
+                    ✓ Corretas: <strong id="correct-count">0</strong>
+                </div>
+                <div class="score-item incorrect">
+                    ✗ Erradas: <strong id="incorrect-count">0</strong>
+                </div>
+                <div class="score-item">
+                    📊 Taxa: <strong id="percentage-score">0%</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="quiz-content">
+                <!-- Questions will be inserted here -->
+            </div>
+
+            <div class="results-screen" id="results-screen">
+                <div class="results-header">🎉 Quiz Finalizado!</div>
+
+                <div class="results-stats">
+                    <div class="stat-card correct">
+                        <div class="stat-number" id="final-correct">0</div>
+                        <div class="stat-label">Questões Corretas</div>
+                    </div>
+                    <div class="stat-card incorrect">
+                        <div class="stat-number" id="final-incorrect">0</div>
+                        <div class="stat-label">Questões Erradas</div>
+                    </div>
+                    <div class="stat-card percentage">
+                        <div class="stat-number" id="final-percentage">0%</div>
+                        <div class="stat-label">Taxa de Acerto</div>
+                    </div>
+                </div>
+
+                <div class="results-message" id="results-message"></div>
+
+                <div class="buttons">
+                    <button class="btn-restart" onclick="restartQuiz()">🔄 Refazer Quiz</button>
+                </div>
+            </div>
+
+            <div class="buttons" id="nav-buttons" style="display: none;">
+                <button class="btn-next" id="next-btn" onclick="nextQuestion()" disabled>Próxima Questão →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            // FÁCIL (8 questões)
+            {
+                difficulty: 'easy',
+                question: 'Calcule: (+7) + (+5) = ?',
+                options: [
+                    { text: '+2', correct: false, explanation: 'A resposta correta é +12. Você deve somar os valores, não subtrair.' },
+                    { text: '−12', correct: false, explanation: 'A resposta correta é +12. Na soma de positivos, o resultado é sempre positivo.' },
+                    { text: '−2, resultado da diferença entre os números', correct: false, explanation: 'A resposta correta é +12. Os dois números são positivos, então somamos: 7 + 5 = 12.' },
+                    { text: '+12', correct: true, explanation: 'Quando somamos dois números positivos, o resultado é positivo. 7 + 5 = 12.' }
+                ]
+            },
+            {
+                difficulty: 'easy',
+                question: 'Calcule: (−3) + (−6) = ?',
+                options: [
+                    { text: '+3', correct: false, explanation: 'A resposta correta é −9. A soma de dois números negativos nunca resulta em positivo.' },
+                    { text: '−3', correct: false, explanation: 'A resposta correta é −9. Você deve somar os valores absolutos e manter o sinal negativo.' },
+                    { text: '−9, pois a soma de dois negativos resulta em negativo', correct: true, explanation: 'Números negativos somados resultam em um número negativo maior. (−3) + (−6) = −9.' },
+                    { text: '+9', correct: false, explanation: 'A resposta correta é −9. Quando somamos dois negativos, o resultado é negativo.' }
+                ]
+            },
+            {
+                difficulty: 'easy',
+                question: 'Qual é o valor de |−8| (módulo de −8)?',
+                options: [
+                    { text: '−8', correct: false, explanation: 'A resposta correta é +8. O módulo é sempre um valor positivo ou zero.' },
+                    { text: 'Impossível calcular', correct: false, explanation: 'A resposta correta é +8. O módulo sempre existe e é o valor positivo do número.' },
+                    { text: '0', correct: false, explanation: 'A resposta correta é +8. O módulo de −8 é sua distância do zero na reta numérica.' },
+                    { text: '+8', correct: true, explanation: 'O módulo (ou valor absoluto) de um número é sempre positivo. |−8| = 8.' }
+                ]
+            },
+            {
+                difficulty: 'easy',
+                question: 'Calcule: (+9) − (+4) = ?',
+                options: [
+                    { text: '−5, pois temos uma subtração', correct: false, explanation: 'A resposta correta é +5. Embora seja uma subtração, o resultado é 9 − 4 = 5 (positivo).' },
+                    { text: '+13', correct: false, explanation: 'A resposta correta é +5. Você deve subtrair, não somar: 9 − 4 = 5.' },
+                    { text: '+5', correct: true, explanation: 'Subtraímos 4 de 9: 9 − 4 = 5. O resultado é positivo.' },
+                    { text: '−13', correct: false, explanation: 'A resposta correta é +5. Na subtração 9 − 4, o resultado é 5.' }
+                ]
+            },
+            {
+                difficulty: 'easy',
+                question: 'Qual é o resultado de (+3) × (+6)?',
+                options: [
+                    { text: '+9, metade do resultado', correct: false, explanation: 'A resposta correta é +18. Multiplicação de 3 × 6 = 18, não 9.' },
+                    { text: '−18', correct: false, explanation: 'A resposta correta é +18. Quando multiplicamos dois positivos, o resultado é positivo.' },
+                    { text: '−3', correct: false, explanation: 'A resposta correta é +18. Você deve multiplicar 3 × 6, não fazer outra operação.' },
+                    { text: '+18', correct: true, explanation: 'Na multiplicação de dois números positivos, o resultado é positivo. 3 × 6 = 18.' }
+                ]
+            },
+            {
+                difficulty: 'easy',
+                question: 'Calcule: (−4) × (+5) = ?',
+                options: [
+                    { text: '+20', correct: false, explanation: 'A resposta correta é −20. Negativo × Positivo = Negativo.' },
+                    { text: '−1, pela razão da diferença', correct: false, explanation: 'A resposta correta é −20. Na multiplicação de sinais diferentes, o resultado é negativo.' },
+                    { text: '+1', correct: false, explanation: 'A resposta correta é −20. Você deve multiplicar: 4 × 5 = 20, e o sinal é negativo.' },
+                    { text: '−20', correct: true, explanation: 'Na multiplicação de um negativo com um positivo, o resultado é negativo. (−4) × 5 = −20.' }
+                ]
+            },
+            {
+                difficulty: 'easy',
+                question: 'Qual é o resultado de (−12) ÷ (+3)?',
+                options: [
+                    { text: '−3', correct: false, explanation: 'A resposta correta é −4. 12 ÷ 3 = 4, e o sinal é negativo.' },
+                    { text: '+4', correct: false, explanation: 'A resposta correta é −4. Negativo dividido por positivo resulta em negativo.' },
+                    { text: '−4', correct: true, explanation: 'Dividindo 12 por 3 obtemos 4. Como temos (−) ÷ (+), o resultado é −4.' },
+                    { text: '+15, pois −12 + 3 = −9', correct: false, explanation: 'A resposta correta é −4. Estamos dividindo, não somando: −12 ÷ 3 = −4.' }
+                ]
+            },
+            {
+                difficulty: 'easy',
+                question: 'Calcule: (−6) × (−2) = ?',
+                options: [
+                    { text: '−12', correct: false, explanation: 'A resposta correta é +12. A multiplicação de dois negativos resulta em positivo.' },
+                    { text: '−8, pela soma dos valores absolutos com sinal negativo', correct: false, explanation: 'A resposta correta é +12. Dois negativos multiplicados resultam em positivo: (−6) × (−2) = +12.' },
+                    { text: '+12', correct: true, explanation: 'Negativo × Negativo = Positivo. (−6) × (−2) = +12.' },
+                    { text: '+8', correct: false, explanation: 'A resposta correta é +12. Você deve multiplicar 6 × 2 = 12 (não somar).' }
+                ]
+            },
+
+            // MÉDIO (8 questões)
+            {
+                difficulty: 'medium',
+                question: 'Calcule: (−5) + (+8) − (+3) = ?',
+                options: [
+                    { text: '0', correct: true, explanation: 'Resolvendo passo a passo: (−5) + (+8) = +3, depois +3 − (+3) = 0. Você pode pensar também como: −5 + 8 − 3 = 0.' },
+                    { text: '−6', correct: false, explanation: 'A resposta correta é 0. Lembre-se: −5 + 8 − 3 = 3 − 3 = 0.' },
+                    { text: '+16', correct: false, explanation: 'A resposta correta é 0. Siga a ordem: (−5) + 8 = 3, então 3 − 3 = 0.' },
+                    { text: '+3, resultado parcial da primeira operação', correct: false, explanation: 'A resposta correta é 0. Você deve continuar a operação: (−5) + 8 − 3 = 3 − 3 = 0.' }
+                ]
+            },
+            {
+                difficulty: 'medium',
+                question: 'Qual é o resultado de (−2) × (−3) × (+4)?',
+                options: [
+                    { text: '+12', correct: false, explanation: 'A resposta correta é +24. Você precisa multiplicar os três números: 2 × 3 × 4 = 24.' },
+                    { text: '−48, resultado da multiplicação sem considerar sinais', correct: false, explanation: 'A resposta correta é +24. Siga as regras de sinais: (−2) × (−3) × (+4) = 6 × 4 = +24.' },
+                    { text: '+24', correct: true, explanation: 'Resolvendo na ordem: (−2) × (−3) = +6, depois +6 × (+4) = +24. Negativo × Negativo = Positivo; depois Positivo × Positivo = Positivo.' },
+                    { text: '−24', correct: false, explanation: 'A resposta correta é +24. Duas operações com negativos: (−) × (−) = (+), depois (+) × (+) = (+).' }
+                ]
+            },
+            {
+                difficulty: 'medium',
+                question: 'Calcule: (−8) + (−5) − (−10) = ?',
+                options: [
+                    { text: '−23', correct: false, explanation: 'A resposta correta é −3. Lembre-se: − (−10) = +10, então −13 + 10 = −3.' },
+                    { text: '+3', correct: false, explanation: 'A resposta correta é −3. Tenha cuidado com o sinal final: −13 + 10 = −3.' },
+                    { text: '+13, metade de −26', correct: false, explanation: 'A resposta correta é −3. Resolvendo corretamente: −8 − 5 + 10 = −3.' },
+                    { text: '−3', correct: true, explanation: 'Resolvendo: (−8) + (−5) = −13, depois −13 − (−10) = −13 + 10 = −3. Lembre-se: subtrair um negativo é somar.' }
+                ]
+            },
+            {
+                difficulty: 'medium',
+                question: 'Qual é o resultado de (+18) ÷ (−6) ÷ (−1)?',
+                options: [
+                    { text: '+6', correct: false, explanation: 'A resposta correta é +3. Divida na ordem: 18 ÷ 6 = 3, e os sinais: (−) ÷ (−) = (+), resultado +3.' },
+                    { text: '−18, por ter dois negativos resultando em negativo', correct: false, explanation: 'A resposta correta é +3. Siga a ordem: 18 ÷ (−6) = −3, depois −3 ÷ (−1) = +3.' },
+                    { text: '+3', correct: true, explanation: 'Resolvendo da esquerda para direita: (+18) ÷ (−6) = −3, depois (−3) ÷ (−1) = +3. Negativo dividido por negativo = Positivo.' },
+                    { text: '−3, pois a divisão associa da esquerda para direita', correct: false, explanation: 'A resposta correta é +3. Resolvendo: (+18) ÷ (−6) = −3, depois (−3) ÷ (−1) = +3. Negativo dividido por negativo é positivo.' }
+                ]
+            },
+            {
+                difficulty: 'medium',
+                question: 'Calcule: (−4)² = ?',
+                options: [
+                    { text: '−8, pois −4 × 2 = −8', correct: false, explanation: 'A resposta correta é +16. (−4)² = (−4) × (−4) = +16, não −4 × 2.' },
+                    { text: '−16', correct: false, explanation: 'A resposta correta é +16. Número negativo elevado a expoente par resulta em positivo.' },
+                    { text: '+16', correct: true, explanation: 'Quando elevamos um número negativo a um expoente par, o resultado é positivo. (−4)² = (−4) × (−4) = +16.' },
+                    { text: '+8', correct: false, explanation: 'A resposta correta é +16. (−4)² significa (−4) × (−4), não (−4) ÷ 2 ou outra operação.' }
+                ]
+            },
+            {
+                difficulty: 'medium',
+                question: 'Qual é o valor de (−3)³?',
+                options: [
+                    { text: '+9', correct: false, explanation: 'A resposta correta é −27. Você deve multiplicar: (−3) × (−3) × (−3) = −27.' },
+                    { text: '−9, resultado de −3 × 3', correct: false, explanation: 'A resposta correta é −27. (−3)³ = (−3) × (−3) × (−3), não −3 × 3.' },
+                    { text: '+27', correct: false, explanation: 'A resposta correta é −27. Número negativo elevado a expoente ímpar resulta em negativo.' },
+                    { text: '−27', correct: true, explanation: 'Quando elevamos um número negativo a um expoente ímpar, o resultado é negativo. (−3)³ = (−3) × (−3) × (−3) = −27.' }
+                ]
+            },
+            {
+                difficulty: 'medium',
+                question: 'Calcule: 2 − (−3 + 5) = ?',
+                options: [
+                    { text: '0', correct: true, explanation: 'Primeiro, resolva o parêntese: (−3 + 5) = 2, depois 2 − 2 = 0.' },
+                    { text: '+4', correct: false, explanation: 'A resposta correta é 0. Lembre-se: −3 + 5 = 2, então 2 − 2 = 0.' },
+                    { text: '+6, pois você subtrai dois negativos e soma o positivo', correct: false, explanation: 'A resposta correta é 0. Comece com o parêntese: (−3 + 5) = 2. Depois: 2 − 2 = 0.' },
+                    { text: '−6', correct: false, explanation: 'A resposta correta é 0. Resolvendo o parêntese primeiro: (−3 + 5) = 2, depois 2 − 2 = 0.' }
+                ]
+            },
+
+            {
+                difficulty: 'medium',
+                question: 'Aplique a propriedade distributiva: (−4) × (3 + 5) = ?',
+                options: [
+                    { text: '−32', correct: true, explanation: 'Pela propriedade distributiva: (−4) × (3 + 5) = (−4) × 8 = −32. Também pode fazer: (−4)×3 + (−4)×5 = −12 + (−20) = −32.' },
+                    { text: '+32, pois negativo vezes soma dá positivo', correct: false, explanation: 'A resposta correta é −32. Na distributiva: (−4) × 3 + (−4) × 5 = −12 + (−20) = −32. Negativo vezes positivo é negativo.' },
+                    { text: '−2', correct: false, explanation: 'A resposta correta é −32. Resolva o parêntese primeiro: 3 + 5 = 8, depois (−4) × 8 = −32.' },
+                    { text: '+8', correct: false, explanation: 'A resposta correta é −32. Cuidado: (−4) × 8 = −32, não +8.' }
+                ]
+            },
+
+            // DIFÍCIL (8 questões)
+            {
+                difficulty: 'hard',
+                question: 'Simplifique usando propriedades da potenciação: (−3)⁵ ÷ (−3)² = ?',
+                options: [
+                    { text: '−27', correct: true, explanation: 'Na divisão de potências de mesma base, subtraímos os expoentes: (−3)⁵ ÷ (−3)² = (−3)⁵⁻² = (−3)³ = −27. Expoente ímpar com base negativa = resultado negativo.' },
+                    { text: '+27, pois negativo dividido por negativo é positivo', correct: false, explanation: 'A resposta correta é −27. Pela propriedade: (−3)⁵⁻² = (−3)³ = −27. Expoente ímpar = resultado negativo.' },
+                    { text: '−9', correct: false, explanation: 'A resposta correta é −27. Subtraia os expoentes: 5 − 2 = 3, então (−3)³ = −27, não (−3)² = 9.' },
+                    { text: '+243', correct: false, explanation: 'A resposta correta é −27. Não some os expoentes na divisão; subtraia: (−3)⁵⁻² = (−3)³ = −27.' }
+                ]
+            },
+            {
+                difficulty: 'hard',
+                question: 'Calcule: [(−2)³ + √16] × (−3) = ?',
+                options: [
+                    { text: '0', correct: false, explanation: 'A resposta correta é +12. Resolva passo a passo: (−2)³ = −8; √16 = 4; [−8 + 4] = −4; −4 × (−3) = +12.' },
+                    { text: '+12', correct: true, explanation: 'Resolvendo passo a passo: (−2)³ = −8; √16 = 4; [−8 + 4] = −4; −4 × (−3) = +12 (negativo × negativo = positivo).' },
+                    { text: '−12', correct: false, explanation: 'A resposta correta é +12. Lembre-se: (−) × (−) = (+). A conta é [−8 + 4] × (−3) = −4 × (−3) = +12.' },
+                    { text: '−24, pois −8 × 3 = −24', correct: false, explanation: 'A resposta correta é +12. Você deve resolver o colchete primeiro: −8 + 4 = −4, depois −4 × (−3) = +12.' }
+                ]
+            },
+            {
+                difficulty: 'hard',
+                question: 'Qual é o resultado de (−2)⁴ − (−1)⁵ + (−2)²?',
+                options: [
+                    { text: '−21, pois temos múltiplas potências negativas', correct: false, explanation: 'A resposta correta é +21. Números negativos com expoentes pares resultam em positivo. 16 + 1 + 4 = +21.' },
+                    { text: '+19', correct: false, explanation: 'A resposta correta é +21. Resolvendo: (−2)⁴ = 16; (−1)⁵ = −1; (−2)² = 4. Então: 16 − (−1) + 4 = 16 + 1 + 4 = +21.' },
+                    { text: '+11', correct: false, explanation: 'A resposta correta é +21. Calcule cada potência: 16 − (−1) + 4 = 16 + 1 + 4 = 21.' },
+                    { text: '+21', correct: true, explanation: 'Resolvendo cada potência: (−2)⁴ = 16 (expoente par); (−1)⁵ = −1 (expoente ímpar); (−2)² = 4. Então: 16 − (−1) + 4 = 16 + 1 + 4 = +21.' }
+                ]
+            },
+            {
+                difficulty: 'hard',
+                question: 'Calcule: 5 × (−2) + (−3)² − [10 − (−5)] = ?',
+                options: [
+                    { text: '−16', correct: true, explanation: 'Resolvendo passo a passo: 5 × (−2) = −10; (−3)² = 9; [10 − (−5)] = [10 + 5] = 15. Então: −10 + 9 − 15 = −16.' },
+                    { text: '+4', correct: false, explanation: 'A resposta correta é −16. Cuidado com a ordem: −10 + 9 − 15 = −1 − 15 = −16.' },
+                    { text: '+24', correct: false, explanation: 'A resposta correta é −16. Lembre-se de resolver o colchete: 10 − (−5) = 15, e depois 9 − 15 = −6; −10 − 6 = −16.' },
+                    { text: '−4, resultado parcial da subtração do colchete', correct: false, explanation: 'A resposta correta é −16. Siga todos os passos: −10 + 9 − 15 = −16.' }
+                ]
+            },
+            {
+                difficulty: 'hard',
+                question: 'Qual é o resultado de √(−4) × (3 − 5)²?',
+                options: [
+                    { text: '+4', correct: false, explanation: 'A resposta correta é que não é possível calcular. √(−4) não existe em números reais. Você não pode extrair raiz quadrada de número negativo.' },
+                    { text: '−2, pois −2 × −2 = −4', correct: false, explanation: 'A resposta correta é que não é possível calcular. (−2) × (−2) = +4, não −4. A raiz quadrada de número negativo não existe em números reais.' },
+                    { text: '+8', correct: false, explanation: 'A resposta correta é que não é possível calcular. Não há número real que multiplicado por si mesmo resulte em −4.' },
+                    { text: 'Não é possível calcular com números reais, pois √(−4) não existe', correct: true, explanation: 'A raiz quadrada de um número negativo não existe no conjunto dos números reais, pois nenhum número real multiplicado por si mesmo resulta em um número negativo.' }
+                ]
+            },
+            {
+                difficulty: 'hard',
+                question: 'Calcule: (−2)² × 3 − [20 ÷ (−4) + 3] = ?',
+                options: [
+                    { text: '+17', correct: false, explanation: 'A resposta correta é +14. Resolvendo: (−2)² = 4; 4 × 3 = 12; [20 ÷ (−4) + 3] = [−5 + 3] = −2; 12 − (−2) = 12 + 2 = +14.' },
+                    { text: '+14', correct: true, explanation: 'Resolvendo passo a passo: (−2)² = 4; 4 × 3 = 12; [20 ÷ (−4) + 3] = [−5 + 3] = −2; 12 − (−2) = 12 + 2 = +14.' },
+                    { text: '+5', correct: false, explanation: 'A resposta correta é +14. Siga na ordem: 12 − (−2) = 14, não 5.' },
+                    { text: '−2, pois o colchete resulta em −2', correct: false, explanation: 'A resposta correta é +14. Você não pode parar no colchete. Complete: 12 − (−2) = 12 + 2 = 14.' }
+                ]
+            },
+            {
+                difficulty: 'hard',
+                question: 'Qual é o resultado de ∛(−8) + (−3) × 2 − (−4)²?',
+                options: [
+                    { text: '−24', correct: true, explanation: 'Resolvendo cada operação: ∛(−8) = −2 (raiz cúbica de −8); (−3) × 2 = −6; (−4)² = 16. Então: −2 − 6 − 16 = −24.' },
+                    { text: '−6, apenas o resultado da multiplicação', correct: false, explanation: 'A resposta correta é −24. Complete todas as operações: −2 − 6 − 16 = −24.' },
+                    { text: '−18', correct: false, explanation: 'A resposta correta é −24. Resolvendo: ∛(−8) = −2; (−3) × 2 = −6; (−4)² = +16. Então: −2 − 6 − 16 = −8 − 16 = −24.' },
+                    { text: '+2', correct: false, explanation: 'A resposta correta é −24. Lembre-se: ∛(−8) = −2; depois −2 − 6 − 16 = −24.' }
+                ]
+            },
+            {
+                difficulty: 'hard',
+                question: 'Calcule: [(−1)⁵ + 2 − (−3)] ÷ (−2) = ?',
+                options: [
+                    { text: '−2', correct: true, explanation: 'Resolvendo o colchete: (−1)⁵ = −1; −1 + 2 = 1; 1 − (−3) = 1 + 3 = 4. Depois: 4 ÷ (−2) = −2.' },
+                    { text: '+2', correct: false, explanation: 'A resposta correta é −2. Lembre-se: [4] ÷ (−2) = −2, pois positivo dividido por negativo resulta em negativo.' },
+                    { text: '+4', correct: false, explanation: 'A resposta correta é −2. Você dividiu corretamente (4), mas se esqueceu do sinal: (+) ÷ (−) = (−).' },
+                    { text: '−4, resultado do colchete sem dividir', correct: false, explanation: 'A resposta correta é −2. O colchete resulta em 4, não −4. Depois: 4 ÷ (−2) = −2.' }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let answered = false;
+
+        function initQuiz() {
+            renderQuestion();
+            document.getElementById('nav-buttons').style.display = 'flex';
+        }
+
+        function renderQuestion() {
+            const question = questions[currentQuestion];
+            const container = document.getElementById('quiz-content');
+
+            // Shuffle options but keep track of which one is correct
+            const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+
+            let html = `
+                <div class="question-container active">
+                    <div class="question-header">
+                        <span class="difficulty-badge ${question.difficulty}">
+                            ${question.difficulty === 'easy' ? '⭐ Fácil' : question.difficulty === 'medium' ? '⭐⭐ Médio' : '⭐⭐⭐ Difícil'}
+                        </span>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options" id="options">
+            `;
+
+            const optionLetters = ['A', 'B', 'C', 'D'];
+            shuffledOptions.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectAnswer(${index}, this)">
+                        <input type="radio" name="answer" id="option-${index}" value="${index}" />
+                        <label for="option-${index}"><strong>${optionLetters[index]})</strong> ${option.text}</label>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            updateProgress();
+            answered = false;
+            document.getElementById('next-btn').disabled = true;
+        }
+
+        function selectAnswer(index, element) {
+            if (answered) return;
+
+            const question = questions[currentQuestion];
+            const allOptions = document.querySelectorAll('.option');
+            const shuffledOptions = Array.from(allOptions).map((el, i) => {
+                // Find the corresponding option object
+                const optionText = el.querySelector('label').textContent.substring(3).trim();
+                return question.options.find(opt => opt.text === optionText);
+            });
+
+            const selectedOption = shuffledOptions[index];
+
+            answered = true;
+            document.getElementById('next-btn').disabled = false;
+
+            allOptions.forEach(opt => opt.classList.add('disabled'));
+
+            const feedback = document.getElementById('feedback');
+
+            if (selectedOption.correct) {
+                correctCount++;
+                element.classList.add('correct');
+                feedback.classList.add('show', 'correct');
+                feedback.innerHTML = `
+                    <div class="feedback-title">✓ Resposta Correta!</div>
+                    <div class="feedback-content">${selectedOption.explanation}</div>
+                `;
+            } else {
+                incorrectCount++;
+                element.classList.add('incorrect');
+                const correctOption = question.options.find(opt => opt.correct);
+                feedback.classList.add('show', 'incorrect');
+                feedback.innerHTML = `
+                    <div class="feedback-title">✗ Resposta Incorreta</div>
+                    <div class="feedback-content">
+                        <strong>Resposta Correta:</strong> ${correctOption.text}<br><br>
+                        <strong>Explicação:</strong> ${correctOption.explanation}
+                    </div>
+                `;
+            }
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+            document.getElementById('current-difficulty').textContent =
+                questions[currentQuestion].difficulty === 'easy' ? 'Fácil' :
+                questions[currentQuestion].difficulty === 'medium' ? 'Médio' : 'Difícil';
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = incorrectCount;
+
+            const total = correctCount + incorrectCount;
+            const percentage = total === 0 ? 0 : Math.round((correctCount / total) * 100);
+            document.getElementById('percentage-score').textContent = percentage + '%';
+        }
+
+        function nextQuestion() {
+            if (!answered) return;
+
+            currentQuestion++;
+
+            if (currentQuestion >= questions.length) {
+                showResults();
+            } else {
+                renderQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-content').innerHTML = '';
+            document.getElementById('nav-buttons').style.display = 'none';
+
+            const percentage = Math.round((correctCount / questions.length) * 100);
+            let message = '';
+            let messageClass = '';
+
+            if (percentage >= 80) {
+                message = '🏆 Excelente! Você dominon o conteúdo!';
+                messageClass = 'excellent';
+            } else if (percentage >= 60) {
+                message = '👍 Bom desempenho! Continue estudando os pontos frágeis.';
+                messageClass = 'good';
+            } else {
+                message = '📚 Você precisa estudar mais este conteúdo. Não desista!';
+                messageClass = 'fair';
+            }
+
+            document.getElementById('results-screen').classList.add('show');
+            document.getElementById('final-correct').textContent = correctCount;
+            document.getElementById('final-incorrect').textContent = incorrectCount;
+            document.getElementById('final-percentage').textContent = percentage + '%';
+            document.getElementById('results-message').textContent = message;
+            document.getElementById('results-message').className = 'results-message ' + messageClass;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            answered = false;
+            document.getElementById('results-screen').classList.remove('show');
+            document.getElementById('nav-buttons').style.display = 'flex';
+            initQuiz();
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', initQuiz);
+    </script>
+</body>
+</html>

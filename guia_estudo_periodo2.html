@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Estudo - Período 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title-icon {
+            font-size: 1.5em;
+        }
+
+        .subsection {
+            background: #f8f9ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .subsection h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .definition {
+            background: #fffacd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #ffd700;
+        }
+
+        .definition strong {
+            color: #d4a017;
+        }
+
+        .example {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .example strong {
+            color: #2e7d32;
+        }
+
+        .method {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .method strong {
+            color: #1565c0;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .tip {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #9c27b0;
+            font-style: italic;
+        }
+
+        .tip strong {
+            color: #6a1b9a;
+        }
+
+        .formula {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            border-left: 4px solid #ff9800;
+        }
+
+        footer {
+            background: #f5f5f5;
+            color: #666;
+            padding: 30px;
+            text-align: center;
+            border-top: 2px solid #e0e0e0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .comparison-box {
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+        }
+
+        .comparison-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="emoji">📊</span> Guia de Estudo - Período 2</h1>
+            <p>MDC, MMC e Estatística</p>
+        </header>
+
+        <div class="content">
+            <!-- PARTE 1: MDC E MMC -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-title-icon">🔢</span>
+                    PARTE 1 - MDC e MMC
+                </div>
+
+                <!-- Divisores e Números Primos -->
+                <div class="subsection">
+                    <h3><span class="emoji">✨</span> Divisores e Números Primos</h3>
+
+                    <div class="definition">
+                        <strong>Divisor:</strong> Um número é divisor de outro quando o divide deixando resto zero (divisão exata).
+                    </div>
+
+                    <p><strong>Exemplo:</strong> Divisores de 12 → D(12) = {1, 2, 3, 4, 6, 12}</p>
+                    <p style="margin-bottom: 15px;">Porque: 12÷1=12, 12÷2=6, 12÷3=4, 12÷4=3, 12÷6=2, 12÷12=1 (todas divisões exatas)</p>
+
+                    <div class="definition">
+                        <strong>Número Primo:</strong> É aquele que tem exatamente 2 divisores: o 1 e ele mesmo.
+                    </div>
+
+                    <p><strong>Exemplos de primos:</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23...</p>
+
+                    <div class="definition">
+                        <strong>Número Composto:</strong> É aquele que tem mais de 2 divisores.
+                    </div>
+
+                    <p><strong>Exemplo:</strong> 12 é composto porque tem divisores: 1, 2, 3, 4, 6, 12 (6 divisores)</p>
+                </div>
+
+                <!-- MDC -->
+                <div class="subsection">
+                    <h3><span class="emoji">🎯</span> Máximo Divisor Comum (MDC)</h3>
+
+                    <div class="definition">
+                        <strong>MDC:</strong> É o maior número que divide todos os números ao mesmo tempo.
+                    </div>
+
+                    <p style="margin-bottom: 15px;"><strong>Exemplo:</strong> MDC(12, 18) = 6 porque 6 é o maior número que divide tanto 12 quanto 18.</p>
+
+                    <div class="method">
+                        <strong>Método 1 - Listagem de Divisores:</strong>
+                        <ul>
+                            <li>D(12) = {1, 2, 3, 4, 6, 12}</li>
+                            <li>D(18) = {1, 2, 3, 6, 9, 18}</li>
+                            <li>Divisores comuns: {1, 2, 3, 6}</li>
+                            <li><span class="highlight">MDC = 6 (o maior deles)</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="method">
+                        <strong>Método 2 - Decomposição em Fatores Primos (Isolada):</strong>
+                        <ul>
+                            <li>12 = 2² × 3</li>
+                            <li>18 = 2 × 3²</li>
+                            <li>Fatores comuns com MENOR expoente: 2¹ × 3¹</li>
+                            <li><span class="highlight">MDC = 2 × 3 = 6</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="method">
+                        <strong>Método 3 - Decomposição Simultânea:</strong>
+                        <p style="margin-top: 10px;">Dividimos pelos fatores que dividem TODOS os números ao mesmo tempo:</p>
+                        <div class="formula">
+                            12, 18 | 2
+                            6,  9  | 3
+                            2,  3  | (paramos aqui)
+                            <br><br>
+                            MDC = 2 × 3 = 6
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Propriedade importante:</strong> Se um número é divisor do outro, então o MDC é o menor deles.
+                        <br><strong>Exemplo:</strong> MDC(5, 10) = 5, porque 5 é divisor de 10.
+                    </div>
+
+                    <div class="definition">
+                        <strong>Números Primos Entre Si:</strong> Quando MDC = 1 (não têm divisor comum além do 1).
+                    </div>
+
+                    <p><strong>Exemplo:</strong> MDC(7, 12) = 1 → são primos entre si</p>
+                </div>
+
+                <!-- MMC -->
+                <div class="subsection">
+                    <h3><span class="emoji">🔁</span> Mínimo Múltiplo Comum (MMC)</h3>
+
+                    <div class="definition">
+                        <strong>MMC:</strong> É o menor múltiplo comum (diferente de zero) de dois ou mais números.
+                    </div>
+
+                    <p style="margin-bottom: 15px;"><strong>Exemplo:</strong> MMC(4, 6) = 12 porque 12 é o menor número que é múltiplo tanto de 4 quanto de 6.</p>
+
+                    <div class="method">
+                        <strong>Método 1 - Listagem de Múltiplos:</strong>
+                        <ul>
+                            <li>M(4) = {4, 8, 12, 16, 20, 24, ...}</li>
+                            <li>M(6) = {6, 12, 18, 24, 30, ...}</li>
+                            <li>Múltiplos comuns: {12, 24, 36, ...}</li>
+                            <li><span class="highlight">MMC = 12 (o menor deles)</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="method">
+                        <strong>Método 2 - Decomposição em Fatores Primos (Isolada):</strong>
+                        <ul>
+                            <li>4 = 2²</li>
+                            <li>6 = 2 × 3</li>
+                            <li>Fatores primos de MAIOR expoente: 2² × 3¹</li>
+                            <li><span class="highlight">MMC = 4 × 3 = 12</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="method">
+                        <strong>Método 3 - Decomposição Simultânea:</strong>
+                        <p style="margin-top: 10px;">Dividimos por todos os fatores primos até chegar a 1:</p>
+                        <div class="formula">
+                            4, 6 | 2
+                            2, 3 | 2
+                            1, 3 | 3
+                            1, 1 |
+                            <br><br>
+                            MMC = 2 × 2 × 3 = 12
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Propriedade importante:</strong> Se o maior número é múltiplo dos menores, então o MMC é o maior deles.
+                        <br><strong>Exemplo:</strong> MMC(5, 15) = 15, porque 15 é múltiplo de 5.
+                    </div>
+
+                    <div class="definition">
+                        <strong>Números Primos Entre Si:</strong> Se dois números são primos entre si, então MMC = produto deles.
+                    </div>
+
+                    <p><strong>Exemplo:</strong> MMC(7, 12) = 7 × 12 = 84 (porque MDC(7,12) = 1)</p>
+
+                    <div class="tip">
+                        <strong>💡 Uso em Frações:</strong>
+                        <ul>
+                            <li><strong>MMC</strong> é usado para somar ou subtrair frações com denominadores diferentes</li>
+                            <li><strong>MDC</strong> é usado para simplificar frações</li>
+                        </ul>
+                        <strong>Exemplo:</strong> Somar 1/4 + 1/6: precisamos de MMC(4,6) = 12
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARTE 2: ESTATÍSTICA -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-title-icon">📈</span>
+                    PARTE 2 - Estatística
+                </div>
+
+                <!-- Média Aritmética -->
+                <div class="subsection">
+                    <h3><span class="emoji">➕</span> Média Aritmética</h3>
+
+                    <div class="definition">
+                        <strong>Média Aritmética (MA):</strong> É a soma de todos os valores dividida pela quantidade de valores.
+                    </div>
+
+                    <div class="formula">
+                        MA = Soma dos valores ÷ Quantidade de valores
+                    </div>
+
+                    <div class="example">
+                        <strong>Exemplo:</strong> Notas de Murilo em 5 avaliações: 20, 14, 22, 13, 21
+                        <br><br>
+                        MA = (20 + 14 + 22 + 13 + 21) ÷ 5
+                        <br>
+                        MA = 90 ÷ 5 = <span class="highlight">18</span>
+                        <br><br>
+                        A nota média de Murilo é 18.
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Dica:</strong> A média é útil para entender o desempenho geral. Se você tem uma nota muito alta e outras muito baixas, a média fica no meio.
+                    </div>
+                </div>
+
+                <!-- Amplitude -->
+                <div class="subsection">
+                    <h3><span class="emoji">📏</span> Amplitude</h3>
+
+                    <div class="definition">
+                        <strong>Amplitude (A):</strong> É a diferença entre o maior valor e o menor valor de um conjunto de dados.
+                    </div>
+
+                    <div class="formula">
+                        A = Maior valor - Menor valor
+                    </div>
+
+                    <div class="example">
+                        <strong>Exemplo:</strong> Com as notas 20, 14, 22, 13, 21
+                        <br><br>
+                        Maior valor = 22
+                        <br>
+                        Menor valor = 13
+                        <br><br>
+                        A = 22 - 13 = <span class="highlight">9</span>
+                    </div>
+
+                    <div class="definition">
+                        <strong>O que a amplitude nos diz:</strong>
+                    </div>
+
+                    <div class="comparison">
+                        <div class="comparison-box">
+                            <h4>Amplitude Pequena</h4>
+                            <p>Os dados estão próximos da média. As notas são semelhantes.</p>
+                            <p><strong>Exemplo:</strong> Notas 18, 19, 17, 20, 18 → A = 3</p>
+                        </div>
+                        <div class="comparison-box">
+                            <h4>Amplitude Grande</h4>
+                            <p>Os dados são dispersos (espalhados). Há grande variação nas notas.</p>
+                            <p><strong>Exemplo:</strong> Notas 10, 15, 25, 20, 12 → A = 15</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Setores -->
+                <div class="subsection">
+                    <h3><span class="emoji">🥧</span> Gráfico de Setores (Pizza)</h3>
+
+                    <div class="definition">
+                        <strong>Gráfico de Setores:</strong> É um gráfico em formato de pizza que mostra partes de um todo. O círculo completo = 100% = 360°
+                    </div>
+
+                    <div class="formula">
+                        Para calcular o ângulo de cada setor:
+                        <br><br>
+                        Ângulo = (Porcentagem ÷ 100) × 360°
+                    </div>
+
+                    <div class="example">
+                        <strong>Exemplo:</strong> Numa turma de 100 alunos:
+                        <ul>
+                            <li>25 alunos gostam de Matemática (25%)</li>
+                            <li>30 alunos gostam de Português (30%)</li>
+                            <li>20 alunos gostam de Inglês (20%)</li>
+                            <li>25 alunos gostam de Educação Física (25%)</li>
+                        </ul>
+                        <br>
+                        Ângulos no gráfico:
+                        <ul>
+                            <li>Matemática: (25÷100) × 360° = <span class="highlight">90°</span></li>
+                            <li>Português: (30÷100) × 360° = <span class="highlight">108°</span></li>
+                            <li>Inglês: (20÷100) × 360° = <span class="highlight">72°</span></li>
+                            <li>Educação Física: (25÷100) × 360° = <span class="highlight">90°</span></li>
+                        </ul>
+                        <br>
+                        Total: 90° + 108° + 72° + 90° = 360° ✓
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Lembre-se:</strong>
+                        <ul>
+                            <li>Um círculo completo = 360°</li>
+                            <li>Metade do círculo = 180°</li>
+                            <li>Um quarto do círculo = 90°</li>
+                            <li>Quanto maior a porcentagem, maior o ângulo do setor</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pesquisas Censitárias vs Amostrais -->
+                <div class="subsection">
+                    <h3><span class="emoji">🔍</span> Pesquisas Censitárias vs Amostrais</h3>
+
+                    <div class="comparison">
+                        <div class="comparison-box">
+                            <h4>Pesquisa Censitária</h4>
+                            <p><strong>Coleta dados de TODA a população.</strong></p>
+                            <p>Exemplo: Censo do IBGE que entrevista todos os brasileiros a cada 10 anos.</p>
+                            <p><strong>Vantagem:</strong> Dados muito precisos.</p>
+                            <p><strong>Desvantagem:</strong> Cara e demorada.</p>
+                        </div>
+                        <div class="comparison-box">
+                            <h4>Pesquisa Amostral</h4>
+                            <p><strong>Coleta dados de uma AMOSTRA representativa da população.</strong></p>
+                            <p>Exemplo: Pesquisa de intenção de voto com 2.000 pessoas em vez de 200 milhões.</p>
+                            <p><strong>Vantagem:</strong> Rápida e barata.</p>
+                            <p><strong>Desvantagem:</strong> Um pouco menos precisa que a censitária.</p>
+                        </div>
+                    </div>
+
+                    <div class="definition">
+                        <strong>População (em estatística):</strong> É o conjunto de TODOS os elementos que queremos estudar.
+                    </div>
+
+                    <div class="definition">
+                        <strong>Amostra:</strong> É um subconjunto da população que é analisado no lugar de toda a população.
+                    </div>
+
+                    <div class="definition">
+                        <strong>Inferência Estatística:</strong> É quando fazemos conclusões sobre toda a população a partir do estudo de uma amostra.
+                    </div>
+
+                    <div class="example">
+                        <strong>Exemplo de Inferência:</strong> Se você pergunta a 1.000 pessoas qual é o sorvete favorito e 40% diz chocolate, você pode inferir (concluir) que aproximadamente 40% de TODOS os brasileiros preferem sorvete de chocolate.
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Importante:</strong> Para que uma amostra seja confiável para fazer inferências, ela precisa ser bem selecionada e representar bem a população.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            Bons estudos, Murilo! <span class="emoji">💪</span>
+            <br>
+            <small style="opacity: 0.7; margin-top: 10px; display: block;">Guia de Estudo - Período 2 | MDC, MMC e Estatística</small>
+        </footer>
+    </div>
+</body>
+</html>
