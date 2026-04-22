@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa de Estudo - Matemática | Murilo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* ---- header ---- */
+        .header {
+            background: linear-gradient(135deg, #4a00e0, #8e2de2);
+            color: white;
+            text-align: center;
+            padding: 40px 30px 30px;
+        }
+        .header h1 { font-size: 2rem; margin-bottom: 6px; }
+        .header .subtitle { font-size: 1.1rem; opacity: .85; }
+        .header .badge {
+            display: inline-block;
+            margin-top: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: .9rem;
+        }
+
+        /* ---- info bar ---- */
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 18px 20px;
+            background: #f8f5ff;
+            border-bottom: 1px solid #ece4f9;
+            font-size: .92rem;
+        }
+        .info-bar span { display: flex; align-items: center; gap: 6px; }
+
+        /* ---- content ---- */
+        .content { padding: 30px; }
+
+        .instructions {
+            background: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 16px 20px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 30px;
+            font-size: .95rem;
+        }
+        .instructions strong { color: #e65100; }
+
+        /* ---- period card ---- */
+        .period {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            transition: box-shadow .2s;
+        }
+        .period:hover { box-shadow: 0 4px 16px rgba(102,126,234,0.18); }
+
+        .period-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 22px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .period-header .icon { font-size: 1.6rem; }
+
+        .period:nth-child(1) .period-header { background: linear-gradient(90deg,#4a00e0,#6c3bdb); }
+        .period:nth-child(2) .period-header { background: linear-gradient(90deg,#00897b,#26a69a); }
+        .period:nth-child(3) .period-header { background: linear-gradient(90deg,#e65100,#fb8c00); }
+
+        .period-body { padding: 20px 22px; }
+
+        .topics {
+            margin-bottom: 16px;
+            font-size: .93rem;
+            color: #555;
+        }
+        .topics strong { color: #333; }
+
+        .links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: .95rem;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-guia {
+            background: #e8eaf6;
+            color: #283593;
+        }
+        .btn-quiz {
+            background: #fce4ec;
+            color: #c62828;
+        }
+
+        /* ---- footer ---- */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            background: #f5f0ff;
+            color: #666;
+            font-size: .9rem;
+        }
+
+        /* ---- progress tracker ---- */
+        .progress-section {
+            margin-top: 10px;
+            padding: 20px 22px 6px;
+            border-top: 1px dashed #e0e0e0;
+        }
+        .progress-section h4 { font-size: .88rem; color: #888; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: .92rem;
+        }
+        .check-row input[type="checkbox"] {
+            width: 18px; height: 18px; accent-color: #4a00e0; cursor: pointer;
+        }
+        .check-row label { cursor: pointer; }
+
+        /* ---- responsive ---- */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.5rem; }
+            .info-bar { gap: 14px; font-size: .84rem; }
+            .links { flex-direction: column; }
+            .link-btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>📐 Programa de Estudo — Matemática</h1>
+        <div class="subtitle">Preparação para a Avaliação Somativa — 1.º Trimestre 2026</div>
+        <div class="badge">🗓️ Prova: 29 de abril</div>
+    </div>
+
+    <!-- Info bar -->
+    <div class="info-bar">
+        <span>👤 Murilo — 7.º ano EF</span>
+        <span>⏱️ 1 h 30 min (3 × 30 min)</span>
+        <span>📝 3 Guias + 3 Quizzes</span>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+        <div class="instructions">
+            <strong>Como estudar:</strong> Em cada período, leia o <em>Guia de Estudo</em> com atenção. Depois, abra o <em>Quiz</em> — resolva cada exercício <strong>no papel</strong> antes de clicar na alternativa. No final do quiz você verá quantas acertou!
+        </div>
+
+        <!-- Período 1 -->
+        <div class="period">
+            <div class="period-header">
+                <span class="icon">1️⃣</span>
+                <span>Período 1 — Operações com Números Inteiros</span>
+            </div>
+            <div class="period-body">
+                <div class="topics">
+                    <strong>Conteúdos:</strong> Adição e subtração de inteiros · Regra de sinais · Multiplicação e divisão · Propriedades das operações · Potenciação (expoente par/ímpar) · Radiciação · Expressões numéricas (ordem das operações)
+                </div>
+                <div class="links">
+                    <a href="guia_estudo_periodo1.html" class="link-btn btn-guia">📖 Guia de Estudo</a>
+                    <a href="quiz_periodo1.html" class="link-btn btn-quiz">✏️ Quiz — 24 questões</a>
+                </div>
+                <div class="progress-section">
+                    <h4>Progresso</h4>
+                    <div class="check-row"><input type="checkbox" id="p1g" onchange="saveProgress()"><label for="p1g">Li o Guia de Estudo</label></div>
+                    <div class="check-row"><input type="checkbox" id="p1q" onchange="saveProgress()"><label for="p1q">Completei o Quiz</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Período 2 -->
+        <div class="period">
+            <div class="period-header">
+                <span class="icon">2️⃣</span>
+                <span>Período 2 — MDC, MMC e Estatística</span>
+            </div>
+            <div class="period-body">
+                <div class="topics">
+                    <strong>Conteúdos:</strong> Divisores e números primos · Máximo Divisor Comum (MDC) · Mínimo Múltiplo Comum (MMC) · Decomposição em fatores primos · Média aritmética · Amplitude · Gráfico de setores · Pesquisa censitária vs. amostral
+                </div>
+                <div class="links">
+                    <a href="guia_estudo_periodo2.html" class="link-btn btn-guia">📖 Guia de Estudo</a>
+                    <a href="quiz_periodo2.html" class="link-btn btn-quiz">✏️ Quiz — 24 questões</a>
+                </div>
+                <div class="progress-section">
+                    <h4>Progresso</h4>
+                    <div class="check-row"><input type="checkbox" id="p2g" onchange="saveProgress()"><label for="p2g">Li o Guia de Estudo</label></div>
+                    <div class="check-row"><input type="checkbox" id="p2q" onchange="saveProgress()"><label for="p2q">Completei o Quiz</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Período 3 -->
+        <div class="period">
+            <div class="period-header">
+                <span class="icon">3️⃣</span>
+                <span>Período 3 — Operações com Números Racionais</span>
+            </div>
+            <div class="period-body">
+                <div class="topics">
+                    <strong>Conteúdos:</strong> Adição e subtração de frações (mesmo denominador / denominadores diferentes) · Adição e subtração de decimais · Multiplicação e divisão de frações · Potenciação de frações · Expressões numéricas com racionais
+                </div>
+                <div class="links">
+                    <a href="guia_estudo_periodo3.html" class="link-btn btn-guia">📖 Guia de Estudo</a>
+                    <a href="quiz_periodo3.html" class="link-btn btn-quiz">✏️ Quiz — 24 questões</a>
+                </div>
+                <div class="progress-section">
+                    <h4>Progresso</h4>
+                    <div class="check-row"><input type="checkbox" id="p3g" onchange="saveProgress()"><label for="p3g">Li o Guia de Estudo</label></div>
+                    <div class="check-row"><input type="checkbox" id="p3q" onchange="saveProgress()"><label for="p3q">Completei o Quiz</label></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Bons estudos, Murilo! 💪 — Lembre-se: resolva tudo no papel antes de conferir a resposta.
+    </div>
+
+</div>
+
+<script>
+    // Simple progress tracker using in-memory state (resets on reload)
+    const checkboxIds = ['p1g','p1q','p2g','p2q','p3g','p3q'];
+
+    function saveProgress() {
+        // Visual-only feedback — no localStorage used
+    }
+</script>
+
+</body>
+</html>
